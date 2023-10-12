@@ -1,0 +1,1034 @@
+{
+  "info": {
+    "_postman_id": "a3993290-10d3-4805-9d40-c03f121a805c",
+    "name": "Serverless Template",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "557304"
+  },
+  "item": [
+    {
+      "name": "boats",
+      "item": [
+        {
+          "name": "Get all",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonData = pm.response.json();\r",
+                  "let primaryKeyStr = pm.environment.get(\"entityIdName\");\r",
+                  "pm.test(`Testing list ${pm.environment.get(\"entity\")}`, function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "    pm.expect(jsonData).to.be.an(\"array\");\r",
+                  "    if(jsonData.length > 0)\r",
+                  "        pm.expect(jsonData[0][primaryKeyStr]).to.be.a(\"number\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{currentAccessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/{{stage}}/{{entity}}/v1/api",
+              "host": ["{{host}}"],
+              "path": ["{{stage}}", "{{entity}}", "v1", "api"]
+            }
+          },
+          "response": [
+            {
+              "name": "Get all",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/{{stage}}/{{entity}}/api",
+                  "host": ["{{host}}"],
+                  "path": ["{{stage}}", "{{entity}}", "api"]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "x-powered-by",
+                  "value": "Express"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"b02-N0GXH97VWp0vdD++Ni5jcAcsbEk\""
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "vary",
+                  "value": "accept-encoding"
+                },
+                {
+                  "key": "content-encoding",
+                  "value": "gzip"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Sep 2022 16:36:57 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n    {\n        \"id\": 31,\n        \"name\": \"272CC\",\n        \"make\": \"Blackfin\",\n        \"length_in_feet\": 27,\n        \"created_at\": \"2022-03-31T00:00:00.000Z\",\n        \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n        \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n        \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n    },\n    {\n        \"id\": 32,\n        \"name\": \"280 Outrage\",\n        \"make\": \"Boston Whaler\",\n        \"length_in_feet\": 28,\n        \"created_at\": \"2022-03-31T00:00:00.000Z\",\n        \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n        \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n        \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n    },\n    {\n        \"id\": 33,\n        \"name\": \"263\",\n        \"make\": \"Calcutta\",\n        \"length_in_feet\": 26,\n        \"created_at\": \"2022-03-31T00:00:00.000Z\",\n        \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n        \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n        \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n    },\n    {\n        \"id\": 34,\n        \"name\": \"28 HB\",\n        \"make\": \"Caymas\",\n        \"length_in_feet\": 28,\n        \"created_at\": \"2022-03-31T00:00:00.000Z\",\n        \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n        \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n        \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n    },\n    {\n        \"id\": 35,\n        \"name\": \"301 CC\",\n        \"make\": \"Cobia\",\n        \"length_in_feet\": 30,\n        \"created_at\": \"2022-03-31T00:00:00.000Z\",\n        \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n        \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n        \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n    },\n    {\n        \"id\": 37,\n        \"name\": \"NEW BOAT\",\n        \"make\": \"Blackfin\",\n        \"length_in_feet\": 27,\n        \"created_at\": \"2022-03-31T00:00:00.000Z\",\n        \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n        \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n        \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n    },\n    {\n        \"id\": 38,\n        \"name\": \"NEW BOAT\",\n        \"make\": \"Blackfin\",\n        \"length_in_feet\": 27,\n        \"created_at\": \"2022-03-31T00:00:00.000Z\",\n        \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n        \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n        \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n    },\n    {\n        \"id\": 39,\n        \"name\": \"NEW BOAT\",\n        \"make\": \"Blackfin\",\n        \"length_in_feet\": 27,\n        \"created_at\": \"2022-03-31T00:00:00.000Z\",\n        \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n        \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n        \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n    },\n    {\n        \"id\": 40,\n        \"name\": \"NEW BOAT\",\n        \"make\": \"Blackfin\",\n        \"length_in_feet\": 27,\n        \"created_at\": \"2022-03-31T00:00:00.000Z\",\n        \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n        \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n        \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n    },\n    {\n        \"id\": 41,\n        \"name\": \"NEW BOAT\",\n        \"make\": \"Blackfin\",\n        \"length_in_feet\": 27,\n        \"created_at\": \"2022-03-31T00:00:00.000Z\",\n        \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n        \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n        \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n    },\n    {\n        \"id\": 44,\n        \"name\": \"NEW BOAT\",\n        \"make\": \"Blackfin\",\n        \"length_in_feet\": 27,\n        \"created_at\": \"2022-03-31T00:00:00.000Z\",\n        \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n        \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n        \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n    }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Get all paginated",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonData = pm.response.json();\r",
+                  "let primaryKeyStr = pm.environment.get(\"entityIdName\");\r",
+                  "pm.test(`Testing list ${pm.environment.get(\"entity\")} paginated`, function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "    pm.expect(jsonData).to.be.an(\"object\");\r",
+                  "    pm.expect(jsonData.data).to.be.an(\"array\");\r",
+                  "    pm.expect(jsonData.count).to.be.an(\"number\");\r",
+                  "    pm.expect(jsonData.total).to.be.an(\"number\");\r",
+                  "    pm.expect(jsonData.page).to.be.an(\"number\");\r",
+                  "    pm.expect(jsonData.pageCount).to.be.an(\"number\");\r",
+                  "    if(jsonData.data.length > 0)\r",
+                  "        pm.expect(jsonData.data[0][primaryKeyStr]).to.be.a(\"number\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{currentAccessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/{{stage}}/{{entity}}/v1/api?limit=10&page=0",
+              "host": ["{{host}}"],
+              "path": ["{{stage}}", "{{entity}}", "v1", "api"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get all paginated",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/{{stage}}/{{entity}}/api?limit=10&page=0",
+                  "host": ["{{host}}"],
+                  "path": ["{{stage}}", "{{entity}}", "api"],
+                  "query": [
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "page",
+                      "value": "0"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "x-powered-by",
+                  "value": "Express"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"a37-esMOfvEzacnIQvC4bOYHYs57QDc\""
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "vary",
+                  "value": "accept-encoding"
+                },
+                {
+                  "key": "content-encoding",
+                  "value": "gzip"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Sep 2022 16:41:16 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                },
+                {
+                  "key": "Transfer-Encoding",
+                  "value": "chunked"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"data\": [\n        {\n            \"id\": 31,\n            \"name\": \"272CC\",\n            \"make\": \"Blackfin\",\n            \"length_in_feet\": 27,\n            \"created_at\": \"2022-03-31T00:00:00.000Z\",\n            \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n            \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n            \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n        },\n        {\n            \"id\": 32,\n            \"name\": \"280 Outrage\",\n            \"make\": \"Boston Whaler\",\n            \"length_in_feet\": 28,\n            \"created_at\": \"2022-03-31T00:00:00.000Z\",\n            \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n            \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n            \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n        },\n        {\n            \"id\": 33,\n            \"name\": \"263\",\n            \"make\": \"Calcutta\",\n            \"length_in_feet\": 26,\n            \"created_at\": \"2022-03-31T00:00:00.000Z\",\n            \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n            \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n            \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n        },\n        {\n            \"id\": 34,\n            \"name\": \"28 HB\",\n            \"make\": \"Caymas\",\n            \"length_in_feet\": 28,\n            \"created_at\": \"2022-03-31T00:00:00.000Z\",\n            \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n            \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n            \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n        },\n        {\n            \"id\": 35,\n            \"name\": \"301 CC\",\n            \"make\": \"Cobia\",\n            \"length_in_feet\": 30,\n            \"created_at\": \"2022-03-31T00:00:00.000Z\",\n            \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n            \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n            \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n        },\n        {\n            \"id\": 37,\n            \"name\": \"NEW BOAT\",\n            \"make\": \"Blackfin\",\n            \"length_in_feet\": 27,\n            \"created_at\": \"2022-03-31T00:00:00.000Z\",\n            \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n            \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n            \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n        },\n        {\n            \"id\": 38,\n            \"name\": \"NEW BOAT\",\n            \"make\": \"Blackfin\",\n            \"length_in_feet\": 27,\n            \"created_at\": \"2022-03-31T00:00:00.000Z\",\n            \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n            \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n            \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n        },\n        {\n            \"id\": 39,\n            \"name\": \"NEW BOAT\",\n            \"make\": \"Blackfin\",\n            \"length_in_feet\": 27,\n            \"created_at\": \"2022-03-31T00:00:00.000Z\",\n            \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n            \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n            \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n        },\n        {\n            \"id\": 40,\n            \"name\": \"NEW BOAT\",\n            \"make\": \"Blackfin\",\n            \"length_in_feet\": 27,\n            \"created_at\": \"2022-03-31T00:00:00.000Z\",\n            \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n            \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n            \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n        },\n        {\n            \"id\": 41,\n            \"name\": \"NEW BOAT\",\n            \"make\": \"Blackfin\",\n            \"length_in_feet\": 27,\n            \"created_at\": \"2022-03-31T00:00:00.000Z\",\n            \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n            \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n            \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n        }\n    ],\n    \"count\": 10,\n    \"total\": 11,\n    \"page\": 1,\n    \"pageCount\": 2\n}"
+            }
+          ]
+        },
+        {
+          "name": "Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();\r",
+                  "let primaryKeyStr = pm.environment.get(\"entityIdName\");\r",
+                  "console.log(\"primaryKeyStr\",primaryKeyStr);\r",
+                  "pm.environment.set(\"primaryKeyValue\", response[primaryKeyStr]);\r",
+                  "delete response[primaryKeyStr];\r",
+                  "console.log(\"response\",response);\r",
+                  "pm.environment.set(\"editEntity\", JSON.stringify(response));\r",
+                  "\r",
+                  "pm.test(`${pm.environment.get(\"entity\")} Saved`, function () {\r",
+                  "    pm.expect(pm.response.code).to.eql(201);\r",
+                  "    pm.response.to.be.withBody;\r",
+                  "    pm.response.to.be.json;\r",
+                  "    pm.expect(response).to.be.an(\"object\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{currentAccessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"name\": \"NEW BOAT\",\r\n    \"make\": \"Blackfin\",\r\n    \"length_in_feet\": 27,\r\n    \"created_at\": \"2022-03-31T00:00:00.000Z\",\r\n    \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\r\n    \"updated_at\": \"2022-03-31T00:00:00.000Z\",\r\n    \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/{{stage}}/{{entity}}/v1/api",
+              "host": ["{{host}}"],
+              "path": ["{{stage}}", "{{entity}}", "v1", "api"]
+            }
+          },
+          "response": [
+            {
+              "name": "Create",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"name\": \"NEW BOAT\",\r\n    \"make\": \"Blackfin\",\r\n    \"length_in_feet\": 27,\r\n    \"created_at\": \"2022-03-31T00:00:00.000Z\",\r\n    \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\r\n    \"updated_at\": \"2022-03-31T00:00:00.000Z\",\r\n    \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/{{stage}}/{{entity}}/api",
+                  "host": ["{{host}}"],
+                  "path": ["{{stage}}", "{{entity}}", "api"]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "x-powered-by",
+                  "value": "Express"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "content-length",
+                  "value": "256"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"100-wmKT1+C3hCUrmMKueRfrSRrolCo\""
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Sep 2022 16:45:46 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 54,\n    \"name\": \"NEW BOAT\",\n    \"make\": \"Blackfin\",\n    \"length_in_feet\": 27,\n    \"created_at\": \"2022-03-31T00:00:00.000Z\",\n    \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n    \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n    \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Get boat by id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonData = pm.response.json();\r",
+                  "pm.test(`Testing get ${pm.environment.get(\"entity\")} by id`, function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "    pm.expect(jsonData).to.be.an(\"object\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/{{stage}}/{{entity}}/v1/api/{{primaryKeyValue}}",
+              "host": ["{{host}}"],
+              "path": [
+                "{{stage}}",
+                "{{entity}}",
+                "v1",
+                "api",
+                "{{primaryKeyValue}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Get boat by id",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{host}}/{{stage}}/{{entity}}/api/{{primaryKeyValue}}",
+                  "host": ["{{host}}"],
+                  "path": [
+                    "{{stage}}",
+                    "{{entity}}",
+                    "api",
+                    "{{primaryKeyValue}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "x-powered-by",
+                  "value": "Express"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "content-length",
+                  "value": "256"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"100-wmKT1+C3hCUrmMKueRfrSRrolCo\""
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "accept-ranges",
+                  "value": "bytes"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Sep 2022 16:45:54 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 54,\n    \"name\": \"NEW BOAT\",\n    \"make\": \"Blackfin\",\n    \"length_in_feet\": 27,\n    \"created_at\": \"2022-03-31T00:00:00.000Z\",\n    \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n    \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n    \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Update",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(`${pm.environment.get(\"entity\")} Edit`, function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJraWQiOiJxNGRrWE9acHd6dlZwaTAza3d5UnpHd1lcL3ZlRTIrcnBIam9wd01QRXZ5cz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3MTdiNGM3My0wMDY5LTQ5NmItYjEzNC01YmZiYmM2NzU5NzciLCJjb2duaXRvOmdyb3VwcyI6WyJzeXN0ZW0iXSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfdTViM1lTUVZhIiwiY29nbml0bzp1c2VybmFtZSI6IjcxN2I0YzczLTAwNjktNDk2Yi1iMTM0LTViZmJiYzY3NTk3NyIsImdpdmVuX25hbWUiOiJBbGVqYW5kcmEiLCJvcmlnaW5fanRpIjoiOTliMDAxMjYtYTY5NS00N2Y5LTkwNWItYjE2ZTVhMDY1YmQ4IiwiYXVkIjoiNGdjNWN0ODY0dTQ2Mmh0am00b2ozOTZxMDUiLCJldmVudF9pZCI6IjIxOTY5MzJkLWNlNTktNGQ4OC1hYzI4LTMzZGRiYWNmMDBmMSIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjQzNjgyNzkwLCJleHAiOjE2NDM3NTIzNzMsImlhdCI6MTY0Mzc0ODc3MywiZmFtaWx5X25hbWUiOiJCZXJuYWwiLCJqdGkiOiIzNTUzMjdjMi0zMzU1LTQyYTctODQxMS0yM2YyYmNkM2JjODYiLCJlbWFpbCI6ImFsZWphbmRyYS5iZXJuYWxAcmV2c3Rhci5jbG91ZCJ9.MthDx0CA6YcmVv3JfzsvMqbEPDCh2DJ-J_eSoRvTimAu-CenFH1aEPM-dFCC9_xntX9nIvoO0r2SXxL0S-RagdsvpBZR8wYqzfHdCFi3BBiffYRZuVN6zI7tYYMqGFK5Httj-IwALlZrnASwDWaApWZp0kViLhkfJh7bpAnuj22MqKT6CYMnpU_shfRZbNvSWR0ijg7myA_dxIrnkfD2Bj6lF1oRpSK7shXzTTAq0hHWcrmcaDi3dlBAOPq5k15tbpptY835bPb630vS2r3r_MYg8B6BJ_2HfR6b3SA5PwC_M2fME26jQQdqV-m8SpJjGMgy5L-W_SfiAjKeRPbu_Q",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{{editEntity}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/{{stage}}/{{entity}}/v1/api/{{primaryKeyValue}}",
+              "host": ["{{host}}"],
+              "path": [
+                "{{stage}}",
+                "{{entity}}",
+                "v1",
+                "api",
+                "{{primaryKeyValue}}"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Update",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{{editEntity}}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{host}}/{{stage}}/{{entity}}/api/{{primaryKeyValue}}",
+                  "host": ["{{host}}"],
+                  "path": [
+                    "{{stage}}",
+                    "{{entity}}",
+                    "api",
+                    "{{primaryKeyValue}}"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "x-powered-by",
+                  "value": "Express"
+                },
+                {
+                  "key": "access-control-allow-origin",
+                  "value": "*"
+                },
+                {
+                  "key": "content-type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "content-length",
+                  "value": "256"
+                },
+                {
+                  "key": "etag",
+                  "value": "W/\"100-wmKT1+C3hCUrmMKueRfrSRrolCo\""
+                },
+                {
+                  "key": "cache-control",
+                  "value": "no-cache"
+                },
+                {
+                  "key": "Date",
+                  "value": "Sat, 24 Sep 2022 16:46:31 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n    \"id\": 54,\n    \"name\": \"NEW BOAT\",\n    \"make\": \"Blackfin\",\n    \"length_in_feet\": 27,\n    \"created_at\": \"2022-03-31T00:00:00.000Z\",\n    \"created_by_id\": \"1580A5CD-5DE1-E7C1-941D-F89AD87923F7\",\n    \"updated_at\": \"2022-03-31T00:00:00.000Z\",\n    \"modified_by_id\": \"01C192B1-E1FA-2D66-7118-B7A19487D765\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Delete",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Delete Ok\", function () {\r",
+                  "     pm.response.to.have.status(204);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/{{stage}}/{{entity}}/v1/api/{{primaryKeyValue}}",
+              "host": ["{{host}}"],
+              "path": [
+                "{{stage}}",
+                "{{entity}}",
+                "v1",
+                "api",
+                "{{primaryKeyValue}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.environment.set(\"entity\", \"boats\");",
+              "pm.environment.set(\"entityIdName\", \"id\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [""]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Values Definitions",
+      "item": [
+        {
+          "name": "Get all",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonData = pm.response.json();\r",
+                  "let primaryKeyStr = pm.environment.get(\"entityIdName\");\r",
+                  "pm.test(`Testing list ${pm.environment.get(\"entity\")}`, function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "    pm.expect(jsonData).to.be.an(\"array\");\r",
+                  "    if(jsonData.length > 0)\r",
+                  "        pm.expect(jsonData[0][primaryKeyStr]).to.be.a(\"number\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{currentAccessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/{{stage}}/{{entity}}/v1/api",
+              "host": ["{{host}}"],
+              "path": ["{{stage}}", "{{entity}}", "v1", "api"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get all paginated",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonData = pm.response.json();\r",
+                  "let primaryKeyStr = pm.environment.get(\"entityIdName\");\r",
+                  "pm.test(`Testing list ${pm.environment.get(\"entity\")} paginated`, function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "    pm.expect(jsonData).to.be.an(\"object\");\r",
+                  "    pm.expect(jsonData.data).to.be.an(\"array\");\r",
+                  "    pm.expect(jsonData.count).to.be.an(\"number\");\r",
+                  "    pm.expect(jsonData.total).to.be.an(\"number\");\r",
+                  "    pm.expect(jsonData.page).to.be.an(\"number\");\r",
+                  "    pm.expect(jsonData.pageCount).to.be.an(\"number\");\r",
+                  "    if(jsonData.data.length > 0)\r",
+                  "        pm.expect(jsonData.data[0][primaryKeyStr]).to.be.a(\"number\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{currentAccessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/{{stage}}/{{entity}}/v1/api?limit=10&page=0",
+              "host": ["{{host}}"],
+              "path": ["{{stage}}", "{{entity}}", "v1", "api"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10"
+                },
+                {
+                  "key": "page",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Create",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();\r",
+                  "let primaryKeyStr = pm.environment.get(\"entityIdName\");\r",
+                  "console.log(\"primaryKeyStr\",primaryKeyStr);\r",
+                  "pm.environment.set(\"primaryKeyValue\", response[primaryKeyStr]);\r",
+                  "delete response[primaryKeyStr];\r",
+                  "console.log(\"response\",response);\r",
+                  "pm.environment.set(\"editEntity\", JSON.stringify(response));\r",
+                  "\r",
+                  "pm.test(`${pm.environment.get(\"entity\")} Saved`, function () {\r",
+                  "    pm.expect(pm.response.code).to.eql(201);\r",
+                  "    pm.response.to.be.withBody;\r",
+                  "    pm.response.to.be.json;\r",
+                  "    pm.expect(response).to.be.an(\"object\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{currentAccessToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"valueDefinition\": \"040\",\r\n    \"description\": \"Active New\",\r\n    \"active\": true,\r\n    \"validationType\": null,\r\n    \"createdAt\": \"2022-10-30T19:41:52.456Z\",\r\n    \"updatedAt\": \"2022-10-31T00:41:52.482Z\",\r\n    \"creatorUserId\": \"demo-app\",\r\n    \"modifierUserId\": null,\r\n    \"definitionType\": {\r\n        \"id\": 1,\r\n        \"definitionType\": \"USER_STATUS\",\r\n        \"description\": \"Group user status\",\r\n        \"active\": true,\r\n        \"createdAt\": \"2022-10-30T19:41:01.316Z\",\r\n        \"updatedAt\": \"2022-10-30T19:41:01.316Z\",\r\n        \"creatorUserId\": \"demo-app\",\r\n        \"modifierUserId\": null\r\n    }\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/{{stage}}/{{entity}}/v1/api",
+              "host": ["{{host}}"],
+              "path": ["{{stage}}", "{{entity}}", "v1", "api"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get value definition by id",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const jsonData = pm.response.json();\r",
+                  "pm.test(`Testing get ${pm.environment.get(\"entity\")} by id`, function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "    pm.expect(jsonData).to.be.an(\"object\");\r",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/{{stage}}/{{entity}}/v1/api/{{primaryKeyValue}}",
+              "host": ["{{host}}"],
+              "path": [
+                "{{stage}}",
+                "{{entity}}",
+                "v1",
+                "api",
+                "{{primaryKeyValue}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Update",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(`${pm.environment.get(\"entity\")} Edit`, function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "eyJraWQiOiJxNGRrWE9acHd6dlZwaTAza3d5UnpHd1lcL3ZlRTIrcnBIam9wd01QRXZ5cz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiI3MTdiNGM3My0wMDY5LTQ5NmItYjEzNC01YmZiYmM2NzU5NzciLCJjb2duaXRvOmdyb3VwcyI6WyJzeXN0ZW0iXSwiaXNzIjoiaHR0cHM6XC9cL2NvZ25pdG8taWRwLnVzLWVhc3QtMS5hbWF6b25hd3MuY29tXC91cy1lYXN0LTFfdTViM1lTUVZhIiwiY29nbml0bzp1c2VybmFtZSI6IjcxN2I0YzczLTAwNjktNDk2Yi1iMTM0LTViZmJiYzY3NTk3NyIsImdpdmVuX25hbWUiOiJBbGVqYW5kcmEiLCJvcmlnaW5fanRpIjoiOTliMDAxMjYtYTY5NS00N2Y5LTkwNWItYjE2ZTVhMDY1YmQ4IiwiYXVkIjoiNGdjNWN0ODY0dTQ2Mmh0am00b2ozOTZxMDUiLCJldmVudF9pZCI6IjIxOTY5MzJkLWNlNTktNGQ4OC1hYzI4LTMzZGRiYWNmMDBmMSIsInRva2VuX3VzZSI6ImlkIiwiYXV0aF90aW1lIjoxNjQzNjgyNzkwLCJleHAiOjE2NDM3NTIzNzMsImlhdCI6MTY0Mzc0ODc3MywiZmFtaWx5X25hbWUiOiJCZXJuYWwiLCJqdGkiOiIzNTUzMjdjMi0zMzU1LTQyYTctODQxMS0yM2YyYmNkM2JjODYiLCJlbWFpbCI6ImFsZWphbmRyYS5iZXJuYWxAcmV2c3Rhci5jbG91ZCJ9.MthDx0CA6YcmVv3JfzsvMqbEPDCh2DJ-J_eSoRvTimAu-CenFH1aEPM-dFCC9_xntX9nIvoO0r2SXxL0S-RagdsvpBZR8wYqzfHdCFi3BBiffYRZuVN6zI7tYYMqGFK5Httj-IwALlZrnASwDWaApWZp0kViLhkfJh7bpAnuj22MqKT6CYMnpU_shfRZbNvSWR0ijg7myA_dxIrnkfD2Bj6lF1oRpSK7shXzTTAq0hHWcrmcaDi3dlBAOPq5k15tbpptY835bPb630vS2r3r_MYg8B6BJ_2HfR6b3SA5PwC_M2fME26jQQdqV-m8SpJjGMgy5L-W_SfiAjKeRPbu_Q",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{{editEntity}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/{{stage}}/{{entity}}/v1/api/{{primaryKeyValue}}",
+              "host": ["{{host}}"],
+              "path": [
+                "{{stage}}",
+                "{{entity}}",
+                "v1",
+                "api",
+                "{{primaryKeyValue}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Delete",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Delete Ok\", function () {\r",
+                  "     pm.response.to.have.status(204);\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/{{stage}}/{{entity}}/v1/api/{{primaryKeyValue}}",
+              "host": ["{{host}}"],
+              "path": [
+                "{{stage}}",
+                "{{entity}}",
+                "v1",
+                "api",
+                "{{primaryKeyValue}}"
+              ]
+            }
+          },
+          "response": []
+        }
+      ],
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.environment.set(\"entity\", \"value-definitions\");",
+              "pm.environment.set(\"entityIdName\", \"id\");"
+            ]
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [""]
+          }
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "/*const echoPostRequest = {",
+          "    url: 'https://cognito-idp.us-east-1.amazonaws.com/',",
+          "    method: 'POST',",
+          "    header: {",
+          "          'Content-Type' : 'application/x-amz-json-1.1',",
+          "          'X-Amz-Target': 'AWSCognitoIdentityProviderService.InitiateAuth'",
+          "      },",
+          "    body: {",
+          "      mode: 'application/json',",
+          "      raw: JSON.stringify(",
+          "          {",
+          "              \"AuthParameters\" : {",
+          "                  \"USERNAME\" : pm.environment.get('credentialsUsername'),",
+          "                  \"PASSWORD\" : pm.environment.get('credentialsPassword')",
+          "          },",
+          "              \"AuthFlow\" : \"USER_PASSWORD_AUTH\",",
+          "              \"ClientId\" : pm.environment.get('cognitoPoolClientId')",
+          "      })",
+          "    }",
+          "  };",
+          "  ",
+          "  var fetchTokenOnEveryRequest = pm.environment.get('fetchTokenOnEveryRequest') ? (pm.environment.get('fetchTokenOnEveryRequest')==='true'):false;",
+          "  ",
+          "  var getToken = true;",
+          "  ",
+          "  if(fetchTokenOnEveryRequest){",
+          "      console.log('removing previous token')",
+          "      pm.environment.unset('accessTokenExpiry')",
+          "  }",
+          "  if (!pm.environment.get('accessTokenExpiry') || ",
+          "      !pm.environment.get('currentAccessToken')) {",
+          "      console.log('Token or expiry date are missing')",
+          "  } else if (pm.environment.get('accessTokenExpiry') <= (new Date()).getTime()) {",
+          "      console.log('Token is expired')",
+          "  } else {",
+          "      getToken = false;",
+          "      console.log('Token and expiry date are all good');",
+          "  }",
+          "  ",
+          "  ",
+          "  if (getToken === true) {",
+          "      pm.sendRequest(echoPostRequest, function (err, res) {",
+          "      console.log(err ? err : res.json());",
+          "          if (err === null) {",
+          "              console.log('Saving the token and expiry date')",
+          "              var responseJson = res.json();",
+          "              console.log(responseJson.AuthenticationResult.ExpiresIn)",
+          "              pm.environment.set('currentAccessToken', responseJson.AuthenticationResult.IdToken)",
+          "              if(!fetchTokenOnEveryRequest){",
+          "                  var expiryDate = new Date();",
+          "                  expiryDate.setSeconds(expiryDate.getSeconds() + responseJson.AuthenticationResult.ExpiresIn);",
+          "                  pm.environment.set('accessTokenExpiry', expiryDate.getTime());",
+          "              }",
+          "          }",
+          "      });",
+          "}",
+          "pm.globals.unset(\"variable_key\");*/"
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ]
+}

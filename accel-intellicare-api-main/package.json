@@ -1,0 +1,152 @@
+{
+  "name": "revstar-services",
+  "version": "0.1.0",
+  "description": "RevStar Serverless Framework NodeJS template project for use with NestJS, TypeORM, and MySQL",
+  "private": true,
+  "license": "MIT",
+  "repository": "github:revstarconsulting/aws-node-restapis-and-rds",
+  "contributors": [
+    {
+      "name": "Jeisson Huerfano",
+      "email": "jeisson.huerfano@revstarconsulting.com"
+    },
+    {
+      "name": "David Malone",
+      "email": "david.malone@revstarconsulting.com"
+    }
+  ],
+  "engines": {
+    "node": ">=16 <18"
+  },
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "bash ./build.sh",
+    "serverless:build": "npm run build && npx serverless package",
+    "clean": "rm -rf dist/ rm -rf .serverless/",
+    "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
+    "start": "npm run serverless:start",
+    "start:dev": "npm run serverless:run",
+    "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
+    "test": "jest --setupFiles dotenv/config",
+    "test:watch": "jest --setupFiles dotenv/config --watch",
+    "test:cov": "jest --setupFiles dotenv/config --coverage",
+    "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+    "test:e2e": "jest --setupFiles dotenv/config --config ./apps/boats/test/jest-e2e.json",
+    "typeorm": "node --require ts-node/register ./node_modules/typeorm/cli.js",
+    "serverless:start": "npm run build  && npx serverless offline --host 0.0.0.0 --httpPort 3500",
+    "serverless:local": "npm run build  && npx serverless offline --config serverless.local.yml --host 0.0.0.0 --httpPort 3500",
+    "serverless:run": "npx serverless offline --config serverless.local.yml  --host 0.0.0.0 --httpPort 3500",
+    "serverless:run:dev": "npx serverless offline --host 0.0.0.0 --httpPort 3500 --aws-profile revstar-dev",
+    "entity:create": "npm run typeorm -- entity:create -n",
+    "migrations:generate": "npm run typeorm -- migration:generate -n",
+    "migrations:create": "npm run typeorm -- migration:create -n",
+    "migrations:run": "npm run typeorm -- migration:run -d data-source.ts && npm run seed:run",
+    "migrations:show": "npm run typeorm -- migration:show -d data-source.ts",
+    "migrations:revert": "npm run typeorm -- migration:revert -d data-source.ts",
+    "seed:run": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js seed",
+    "seed:config": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js config",
+    "db:create": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js db:create",
+    "db:drop": "ts-node ./node_modules/typeorm-extension/dist/cli/index.js db:drop",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@aws-crypto/client-node": "3.1.1",
+    "@nestjs/common": "^9.0.0",
+    "@nestjs/core": "^9.0.0",
+    "@nestjs/passport": "9.0.0",
+    "@nestjs/platform-express": "^9.0.0",
+    "@nestjs/swagger": "^6.1.3",
+    "@nestjs/typeorm": "^9.0.1",
+    "@rewiko/crud": "^5.1.12",
+    "@rewiko/crud-typeorm": "^5.1.12",
+    "@vendia/serverless-express": "4.5.4",
+    "aws-lambda": "1.0.7",
+    "aws-sdk": "2.1097.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
+    "dotenv": "^16.0.0",
+    "fastify-swagger": "5.0.0",
+    "jwks-rsa": "2.0.5",
+    "mp3-duration": "^1.1.0",
+    "mysql2": "2.3.3",
+    "passport": "0.6.0",
+    "passport-jwt": "4.0.0",
+    "passport-local": "1.0.0",
+    "reflect-metadata": "0.1.13",
+    "rimraf": "3.0.2",
+    "rxjs": "7.5.5",
+    "serverless-tscpaths": "^0.0.7",
+    "swagger-ui-express": "4.3.0",
+    "twilio": "^4.8.0",
+    "typeorm": "^0.3.10",
+    "typeorm-extension": "^2.2.13",
+    "typeorm-naming-strategies": "4.1.0",
+    "uuid": "8.3.2"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^9.0.0",
+    "@nestjs/schematics": "^9.0.0",
+    "@nestjs/testing": "^9.0.0",
+    "@types/aws-lambda": "8.10.93",
+    "@types/express": "^4.17.13",
+    "@types/jest": "28.1.8",
+    "@types/node": "^16.0.0",
+    "@types/passport-local": "1.0.34",
+    "@types/supertest": "^2.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^8.0.1",
+    "jest": "28.1.3",
+    "lint-staged": "^13.0.3",
+    "prettier": "2.6.0",
+    "serverless-dotenv-plugin": "3.12.2",
+    "serverless-offline": "^8.8.1",
+    "serverless-offline-ssm": "^6.2.0",
+    "serverless-plugin-typescript": "^2.1.4",
+    "source-map-support": "0.5.21",
+    "supertest": "6.2.2",
+    "terser-webpack-plugin": "5.3.1",
+    "ts-jest": "28.0.8",
+    "ts-loader": "9.2.8",
+    "ts-node": "10.7.0",
+    "tsconfig-paths": "4.1.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^4.9.3"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": ".",
+    "testRegex": ".*\\.spec\\.ts$",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "collectCoverageFrom": [
+      "**/*.(t|j)s"
+    ],
+    "coverageDirectory": "./coverage",
+    "testEnvironment": "node",
+    "roots": [
+      "<rootDir>/apps/",
+      "<rootDir>/libs/"
+    ],
+    "moduleNameMapper": {
+      "^@app/database(|/.*)$": "<rootDir>/libs/database/src/$1",
+      "^@auth/auth(|/.*)$": "<rootDir>/libs/auth/src/$1",
+      "^payment/payment(|/.*)$": "<rootDir>/libs/payment/src/$1",
+      "^@app/mail(|/.*)$": "<rootDir>/libs/mail/src/$1"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix --max-warnings=0",
+      "prettier --write"
+    ]
+  }
+}

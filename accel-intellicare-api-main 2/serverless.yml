@@ -1,0 +1,204 @@
+service: acceleq-services
+frameworkVersion: '3'
+useDotenv: true
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline-ssm
+  - serverless-offline
+
+custom:
+  serverless-offline-ssm:
+    stages:
+      - local
+    #MODIFY FOR LOCAL DATABASE WORK
+    ssm:
+      '/dev/db-user': ''
+      '/dev/db-password': ''
+      '/dev/db-host': 'localhost'
+      '/dev/db-name': ''
+      '/dev/region': ''
+      '/dev/cognito-pool-id': ''
+      '/dev/cognito-client-id': ''
+      '/dev/api-gateway-id': 'unusedInLocal'
+      '/dev/api-gateway-root-id': 'unusedInLocal'
+      '/dev/lambda-deploy': 'not-used-in-local'
+      '/dev/lambda-role': 'unusedInLocal'
+      '/dev/lambda-sg': 'unusedInLocal'
+      '/dev/private-subnet-1': 'unusedInLocal'
+      '/dev/private-subnet-2': 'unusedInLocal'
+      '/dev/acceleq_page_user/AWS_ACCESS_KEY_ID': ''
+      '/dev/acceleq_page_user/AWS_SECRET_ACCESS_KEY': ''
+      '/dev/acceleq_page_user/AWS_PIPELINE_ID': ''
+      '/dev/acceleq_page_user/AWS_FORMAT_MP3': ''
+      '/dev/acceleq_page_user/AWS_S3_BUCKET': ''
+      '/dev/acceleq_page_user/AWS_VERSION': 'latest'
+      '/dev/acceleq_page_user/TWILIO_ACCOUNT_SID': ''
+      '/dev/acceleq_page_user/TWILIO_ACCOUNT_TOKEN': ''
+      '/dev/acceleq_page_user/TWILIO_API_KEY': ''
+      '/dev/acceleq_page_user/TWILIO_API_SECRET': ''
+      '/dev/acceleq_page_user/SES_IDENTITY_EMAIL': ''
+      '/dev/acceleq_page_user/APP_URL': ''
+      '/dev/acceleq_page_user/API_URL': ''
+  serverless-offline:
+    useChildProcesses: true
+  secrets:
+    #TODO user secret manager
+    db_user: ${ssm:/${env:PARAMS_ENV}/db-user}
+    db_password: ${ssm:/${env:PARAMS_ENV}/db-password}
+    db_host: ${ssm:/${env:PARAMS_ENV}/db-host}
+    db_name: ${ssm:/${env:PARAMS_ENV}/db-name}
+    db_port: 3306
+    region: ${ssm:/${env:PARAMS_ENV}/region}
+    cognito_user_pool_id: ${ssm:/${env:PARAMS_ENV}/cognito-pool-id}
+    cognito_client_id: ${ssm:/${env:PARAMS_ENV}/cognito-client-id}
+    cognito_region: ${ssm:/${env:PARAMS_ENV}/region}
+    aws_access_key_id: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/AWS_ACCESS_KEY_ID}
+    aws_secret_access_key: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/AWS_SECRET_ACCESS_KEY}
+    aws_pipeline_id: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/AWS_PIPELINE_ID}
+    aws_format_mp3: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/AWS_FORMAT_MP3}
+    aws_s3_bucket: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/AWS_S3_BUCKET}
+    aws_version: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/AWS_VERSION}
+    twilio_account_sid: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/TWILIO_ACCOUNT_SID}
+    twilio_account_token: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/TWILIO_ACCOUNT_TOKEN}
+    twilio_api_key: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/TWILIO_API_KEY}
+    twilio_api_secret: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/TWILIO_API_SECRET}
+    ses_identity_mail: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/SES_IDENTITY_EMAIL}
+    app_url: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/APP_URL}
+    api_url: ${ssm:/${env:PARAMS_ENV}/acceleq_page_user/API_URL}
+
+provider:
+  name: aws
+  stage: ${opt:stage,'local'} # default to 'local'
+  versionFunctions: false
+  timeout: 30
+  region: us-east-1
+  apiGateway:
+    restApiId: ${ssm:/${env:PARAMS_ENV}/api-gateway-id}
+    restApiRootResourceId: ${ssm:/${env:PARAMS_ENV}/api-gateway-root-id}
+  runtime: nodejs14.x
+  deploymentBucket:
+    name: ${ssm:/${env:PARAMS_ENV}/lambda-deploy}
+  iam:
+    role: ${ssm:/${env:PARAMS_ENV}/lambda-role}
+  vpc:
+    securityGroupIds:
+      - ${ssm:/${env:PARAMS_ENV}/lambda-sg}
+    subnetIds:
+      - ${ssm:/${env:PARAMS_ENV}/private-subnet-1}
+      - ${ssm:/${env:PARAMS_ENV}/private-subnet-2}
+  # Environment Variables
+  environment:
+    DB_DIALECT: 'mysql'
+    DB_DATABASE: ${self:custom.secrets.db_name}
+    DB_USERNAME: ${self:custom.secrets.db_user}
+    DB_PASSWORD: ${self:custom.secrets.db_password}
+    DB_HOST: ${self:custom.secrets.db_host}
+    DB_PORT: ${self:custom.secrets.db_port}
+    COGNITO_USER_POOL_ID: ${self:custom.secrets.cognito_user_pool_id}
+    COGNITO_CLIENT_ID: ${self:custom.secrets.cognito_client_id}
+    COGNITO_REGION: ${self:custom.secrets.cognito_region}
+    AWS_BUCKET_NAME: 994514690620-images
+    AWS_API_ACCESS_KEY_ID: ${self:custom.secrets.aws_access_key_id}
+    AWS_API_SECRET_ACCESS_KEY: ${self:custom.secrets.aws_secret_access_key}
+    AWS_VERSION: ${self:custom.secrets.aws_version}
+    AWS_PIPELINE_ID: ${self:custom.secrets.aws_pipeline_id}
+    AWS_FORMAT_MP3: ${self:custom.secrets.aws_format_mp3}
+    AWS_API_REGION: ${self:custom.secrets.cognito_region}
+    AWS_S3_BUCKET: ${self:custom.secrets.aws_s3_bucket}
+    PARAMS_ENV: ${env:PARAMS_ENV}
+    TWILIO_ACCOUNT_SID: ${self:custom.secrets.twilio_account_sid}
+    TWILIO_ACCOUNT_TOKEN: ${self:custom.secrets.twilio_account_token}
+    TWILIO_API_KEY: ${self:custom.secrets.twilio_api_key}
+    TWILIO_API_SECRET: ${self:custom.secrets.twilio_api_secret}
+    SES_IDENTITY_EMAIL: ${self:custom.secrets.ses_identity_mail}
+    APP_URL: ${self:custom.secrets.app_url}
+    API_URL: ${self:custom.secrets.api_url}
+package:
+  individually: true
+  patterns:
+    - '!./**'
+functions:
+  boats:
+    handler: dist/apps/boats/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /boats
+      - http:
+          method: ANY
+          path: '/boats/{proxy+}'
+    package:
+      patterns:
+        - dist/apps/boats/**
+  value-definitions:
+    handler: dist/apps/value-definitions/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /value-definitions
+      - http:
+          method: ANY
+          path: '/value-definitions/{proxy+}'
+    package:
+      patterns:
+        - dist/apps/value-definitions/**
+  users:
+    handler: dist/apps/users/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /users
+      - http:
+          method: ANY
+          path: '/users/{proxy+}'
+    package:
+      patterns:
+        - dist/apps/users/**
+  patients:
+    handler: dist/apps/patients/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /patients
+      - http:
+          method: ANY
+          path: '/patients/{proxy+}'
+    package:
+      patterns:
+        - dist/apps/patients/**
+  appointment-meetings:
+    handler: dist/apps/appointment-meetings/main.handler
+    events:
+      - http:
+          method: ANY
+          path: /appointment-meetings
+      - http:
+          method: ANY
+          path: "/appointment-meetings/{proxy+}"
+    package:
+      patterns:
+        - dist/apps/appointment-meetings/**
+  media:
+    handler: dist/apps/media/main.handler
+    timeout: 900
+    events:
+      - http:
+          method: ANY
+          path: /media
+      - http:
+          method: ANY
+          path: "/media/{proxy+}"
+    package:
+      patterns:
+        - dist/apps/media/**
+  trigger-media-upload:
+    handler: custom/main.handler
+    events:
+      - s3:
+          bucket: ${self:custom.secrets.aws_s3_bucket}
+          event: s3:ObjectCreated:*
+          existing: true
+    package:
+      patterns:
+        - custom/**

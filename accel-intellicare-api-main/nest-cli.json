@@ -1,0 +1,97 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/boats/src",
+  "monorepo": true,
+  "root": "apps/boats",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/boats/tsconfig.app.json",
+    "assets": [
+      "**/*.hbs"
+    ],
+    "watchAssets": true
+  },
+  "projects": {
+    "database": {
+      "type": "library",
+      "root": "libs/database",
+      "entryFile": "index",
+      "sourceRoot": "libs/database/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/database/tsconfig.lib.json"
+      }
+    },
+    "boats": {
+      "type": "application",
+      "root": "apps/boats",
+      "entryFile": "main",
+      "sourceRoot": "apps/boats/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/boats/tsconfig.app.json"
+      }
+    },
+    "value-definitions": {
+      "type": "application",
+      "root": "apps/value-definitions",
+      "entryFile": "main",
+      "sourceRoot": "apps/value-definitions/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/value-definitions/tsconfig.app.json"
+      }
+    },
+    "users": {
+      "type": "application",
+      "root": "apps/users",
+      "entryFile": "main",
+      "sourceRoot": "apps/users/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/users/tsconfig.app.json"
+      }
+    },
+    "patients": {
+      "type": "application",
+      "root": "apps/patients",
+      "entryFile": "main",
+      "sourceRoot": "apps/patients/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/patients/tsconfig.app.json"
+      }
+    },
+    "appointment-meetings": {
+      "type": "application",
+      "root": "apps/appointment-meetings",
+      "entryFile": "main",
+      "sourceRoot": "apps/appointment-meetings/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/appointment-meetings/tsconfig.app.json"
+      }
+    },
+    "media": {
+      "type": "application",
+      "root": "apps/media",
+      "entryFile": "main",
+      "sourceRoot": "apps/media/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/media/tsconfig.app.json"
+      }
+    },
+    "transcription-store": {
+      "type": "application",
+      "root": "apps/transcription-store",
+      "entryFile": "main",
+      "sourceRoot": "apps/transcription-store/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/transcription-store/tsconfig.app.json"
+      }
+    },
+    "mail": {
+      "type": "library",
+      "root": "libs/mail",
+      "entryFile": "index",
+      "sourceRoot": "libs/mail/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/mail/tsconfig.lib.json"
+      }
+    }
+  }
+}
